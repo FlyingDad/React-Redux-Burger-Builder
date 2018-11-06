@@ -1,18 +1,29 @@
 import React from 'react';
-import Logo from '../../Logo/Logo'
-import NavigationItems from '../NavigationItems/NavigationItems'
-import './sidebar.scss'
+import Backdrop from '../../UI/Backdrop/Backdrop';
+import Aux from '../../../hoc/Aux/Aux';
+import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import './sidebar.scss';
 
-const Sidebar = (props) => {
+const Sidebar = props => {
+
+	let attachedClasses = ['Sidebar', 'Close']
+	if(props.open) {
+		attachedClasses = ['Sidebar', 'Open']
+	}
+
 	return (
-		<div className='Sidebar'>
-			<div className='logo'>
-				<Logo />
+		<Aux>
+			<Backdrop show={props.open} clicked={props.closed}/>
+			<div className={attachedClasses.join(' ')}>
+				<div className="logo">
+					<Logo />
+				</div>
+				<nav>
+					<NavigationItems />
+				</nav>
 			</div>
-			<nav>
-				<NavigationItems />
-			</nav>
-		</div>
+		</Aux>
 	);
 };
 

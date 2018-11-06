@@ -3,10 +3,16 @@ import Logo from '../../Logo/Logo'
 import NavigationItems from '../NavigationItems/NavigationItems'
 import './toolbar.scss'
 
-const Toolbar = () => {
+const Toolbar = (props) => {
 	return (
 		<header className='Toolbar'>
-			<div>Menu</div>
+			<div 
+				className="hamburger"
+				onClick={props.menuClick}>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 			<div className='logo'>
 				<Logo />
 			</div>
