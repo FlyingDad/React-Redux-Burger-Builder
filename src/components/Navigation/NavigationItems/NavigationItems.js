@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NavItem from './NavigationItem/NavigationItem'
 import './navigationitems.scss'
 
@@ -8,7 +9,7 @@ const NavigationItems = () => {
 			<NavItem link='/' active>
 				BurgerBuilder
 			</NavItem>
-			<NavItem link='/'>
+			<NavItem link='/checkout'>
 				Checkout
 			</NavItem>
 		</ul>
