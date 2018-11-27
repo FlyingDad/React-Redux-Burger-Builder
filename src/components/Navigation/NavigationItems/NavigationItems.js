@@ -6,11 +6,11 @@ import './navigationitems.scss'
 const NavigationItems = () => {
 	return (
 		<ul className='NavigationItems'>
-			<NavItem link='/' active>
+			<NavItem link='/'>
 				BurgerBuilder
 			</NavItem>
-			<NavItem link='/checkout'>
-				Checkout
+			<NavItem link='/orders'>
+				Orders
 			</NavItem>
 		</ul>
 	);
