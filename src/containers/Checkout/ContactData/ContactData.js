@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import axios from '../../../hoc/axios-orders'
+import axios from '../../../hoc/axios-orders';
 import Input from '../../../components/UI/Input/input'
 import './contactdata.scss'
+import * as actions from '../../../store/actions/index';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
+
 
 class ContactData extends Component {
 
@@ -90,13 +93,12 @@ class ContactData extends Component {
 					}
 				}
 		},
-		formIsValid: false,
-		loading: false
+		formIsValid: false
 	}
 
 	orderHandler = (event) => {
 		event.preventDefault();
-		this.setState({loading: true})
+		// this.setState({loading: true})
 
 		// get form data
 		const formData = {};
@@ -110,16 +112,7 @@ class ContactData extends Component {
 			orderData: formData
 		};
 
-		axios
-			.post('/orders.json', order)
-			.then(response => {
-				this.setState({loading: false})
-				this.props.history.push('/');
-			})
-			.catch(error => {
-				console.log(error);
-				this.setState({loading: false})
-			});
+		this.props.onPurchaseBurger(order)
 	}
 
 	inputChangedHandler = (event, inputID) => {
@@ -183,7 +176,7 @@ class ContactData extends Component {
 			))}
 			<Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
 		</form>);
-		if(this.state.loading) {
+		if(this.props.loading) {
 			form = <Spinner />
 		}
 		return (
@@ -197,9 +190,16 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
 	return {
-		ingredients: state.ingredients,
-		price: state.totalPrice
+		ingredients: state.burgerBuilder.ingredients,
+		price: state.burgerBuilder.totalPrice,
+		loading: state.order.loading
 	}
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+	return {
+		onPurchaseBurger: (order) => dispatch(actions.purchaseBurger(order))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
