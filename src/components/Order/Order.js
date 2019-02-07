@@ -3,6 +3,7 @@ import './order.scss'
 
 const Order = (props) => {
 	let ingredients=[];
+	console.log(props)
 	for(let ingredient in props.ingredients){
 		ingredients.push({name: ingredient, amount: props.ingredients[ingredient]})
 	}
@@ -15,7 +16,7 @@ const Order = (props) => {
 
 	return (
 		<div className="Order">	
-			<p>Ingredients: {ingredientOutput}</p>
+			<p>Ingredients: {ingredientOutput} </p>
 			<p>Price: <strong>${Number.parseFloat(props.price).toFixed(2)}</strong></p>
 		</div>
 	);
