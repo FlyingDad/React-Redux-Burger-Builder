@@ -12,6 +12,9 @@ const NavigationItems = () => {
 			<NavItem link='/orders'>
 				Orders
 			</NavItem>
+			<NavItem link='/auth'>
+				Login
+			</NavItem>
 		</ul>
 	);
 };
