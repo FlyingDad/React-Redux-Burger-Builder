@@ -16,7 +16,7 @@ const Burger = (props) => {
 			return prev.concat(curr)
 		}, [])
 		if(selectedIngredients.length === 0){
-			selectedIngredients[0] = <p>Please add some ingredients!</p>
+			selectedIngredients[0] = <p key={0}>Please add some ingredients!</p>
 		}
 	
 	return (
