@@ -1,4 +1,5 @@
 import * as actions from '../actions/actionsTypes';
+import { updateObject } from '../utility';
 
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -16,14 +17,13 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
 	switch (type) {
 		case actions.ADD_INGREDIENT:
-			return {
-				...state,
-				ingredients: {
-					...state.ingredients,
-					[payload]: state.ingredients[payload] + 1
-				},
+			const updatedIngredient = {[payload]: state.ingredients[payload] + 1};
+			const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+			const updatedState = {
+				ingredients: updatedIngredients,
 				totalPrice: state.totalPrice + INGREDIENT_PRICES[payload]
-			};
+			}
+			return updateObject(state, updatedState);
 
 		case actions.REMOVE_INGREDIENT:
 			return {
