@@ -11,7 +11,8 @@ const INGREDIENT_PRICES = {
 const initialState = {
 	ingredients: null,
 	totalPrice: 3.99,
-	error: false
+	error: false,
+	building: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -21,7 +22,8 @@ export default (state = initialState, { type, payload }) => {
 			const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
 			const updatedState = {
 				ingredients: updatedIngredients,
-				totalPrice: state.totalPrice + INGREDIENT_PRICES[payload]
+				totalPrice: state.totalPrice + INGREDIENT_PRICES[payload],
+				building: true
 			}
 			return updateObject(state, updatedState);
 
@@ -35,12 +37,14 @@ export default (state = initialState, { type, payload }) => {
 				totalPrice: state.totalPrice - INGREDIENT_PRICES[payload]
 			};
 
+		// default state on load or reload page
 		case actions.SET_INGREDIENTS:
 			return {
 				...state,
 				ingredients: payload,
 				error: false,
-				totalPrice: 3.99
+				totalPrice: 3.99,
+				building: false
 			};
 
 		case actions.FETCH_INGREDIENTS_FAILED:
